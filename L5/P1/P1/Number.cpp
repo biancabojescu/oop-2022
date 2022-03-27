@@ -10,7 +10,7 @@ Number::Number(const char* value, int base) {
     for (int i = 0; i < strlen(value); ++i) {
         nr++;
     }
-    digit_count = nr;
+    this->digit_count = nr;
     char* sir   = new char[strlen(value) + 1];
     strcpy(sir, value);
     while (sir != nullptr) {
@@ -123,7 +123,14 @@ Number& Number::operator=(int nr) {
 }
 
 void Number::Print() {
-    std::cout << number;
+    if (digit_count > 0) {
+        std::cout << digit_count << "\n";
+        for (int i = 0; i < digit_count; ++i) {
+            std::cout << char_number[i];
+        }
+        std::cout << "\n";
+    } else
+        std::cout << number << "\n";
 }
 
 Number& Number::operator=(const char* r) {
