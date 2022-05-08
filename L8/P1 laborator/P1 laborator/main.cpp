@@ -24,7 +24,7 @@ void SplitThePhrase(std::string s, std::map<std::string, int>& lista_de_cuvinte)
     int start = 0;
     while (count < s.size()) {
         if (s[count] == ' ') {
-            auto aux = s.substr(start, count-start);
+            auto aux = s.substr(start, count - start);
             lista_de_cuvinte[aux]++;
             start = count + 1;
             count++;
@@ -57,14 +57,13 @@ void SplitThePhrase(std::string s, std::map<std::string, int>& lista_de_cuvinte)
     }
 }
 
-bool Compare(std::pair<std::string,int>&stg, std::pair<std::string,int>&dr) {
+bool Compare(std::pair<std::string, int>& stg, std::pair<std::string, int>& dr) {
     if (stg.second != dr.second) {
         return stg.second < dr.second;
     } else {
         return stg.first.compare(dr.first) > 0;
     }
 }
-
 
 int main() {
     std::string s;
@@ -73,18 +72,19 @@ int main() {
     std::map<std::string, int> lista_de_cuvinte;
     SplitThePhrase(s, lista_de_cuvinte);
 
-    std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int>>, decltype(&Compare)> coada(Compare);
+    std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int>>, decltype(&Compare)>
+          coada(Compare);
 
-   std::map<std::string, int>::iterator i = lista_de_cuvinte.begin();
+    std::map<std::string, int>::iterator i = lista_de_cuvinte.begin();
     while (i != lista_de_cuvinte.end()) {
-       std::pair<std::string, int> pereche;
-        pereche.first = i->first;
-       pereche.second = i->second;
+        std::pair<std::string, int> pereche;
+        pereche.first  = i->first;
+        pereche.second = i->second;
         coada.push(pereche);
-       i++;
+        i++;
     }
     while (!coada.empty()) {
-        std::cout << coada.top().first << "=>" << coada.top().second << "\n";
+        std::cout << coada.top().first << " => " << coada.top().second << "\n";
         coada.pop();
     }
 
